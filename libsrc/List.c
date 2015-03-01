@@ -4,7 +4,7 @@
 #include "List.h"
 
 /*
-
+ hey just add something
 	list.c 
 		Contains functions to manipulate a doubly-linked list.
  
