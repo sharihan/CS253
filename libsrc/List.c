@@ -17,35 +17,54 @@ struct list * createList(int (*equals)(const void *,const void *),
 	return list;
 }
 
+
+/**
+ * Freeing the list.
+ */
 void freeList(struct list *list)
+{
+/*
+  if(list== isEmpty())  return;
 
-if(list== isEmpty())
-  return;
-
-    Node *temp = list-> head;
+    struct node *temp = list-> head;
     
-      while(temp != null){
-	Node n= temp -> next;
+      while(temp != Null){
+	struct node *n= temp -> next;
 	freeNode(temp, list -> freeObject);
 	temp=n;
 
 {
   //setting head and tail to null
-       list ->head=null;
-       list -> tail= null;
+       list ->head=NULL;
+       list -> tail= NULL;
        free(list);
+  */     
 }
 
+
+/**
+ * Getting the size of the list.
+ * @return size
+ */
 int getSize(const struct list *list)
 {
 	return list -> size;
 }
 
+/**
+ * Checking if the list is empty.
+ * @return list=0
+ */
 int isEmpty(const struct list *list)
 {
-	return list->size == 0;
+	return list -> size==0;
 }
 
+
+/**
+ * adding from the front of the list.
+ * 
+ */
 void addAtFront(struct list *list, struct node *node)
 {
 	if (list == NULL) return;
@@ -62,27 +81,143 @@ void addAtFront(struct list *list, struct node *node)
 	}
 }
 
+
+
+/**
+ * adding from the rear of the list.
+ * 
+ */
 void addAtRear(struct list *list, struct node *node)
 {
-}
+    
+     if (list == NULL) return;
+     if (node == NULL) return;
+     list -> size ++;
+     
+      if(list -> tail != NULL){
+       list -> tail -> next = node;
+   }
+   
+    if(list -> tail == NULL){
+          list -> tail = node;
+          list -> head = node;
+	  list -> size ++;
+          return; 
+  }
+   
+  node -> prev = list -> tail;
+  list -> tail = node;
+  list -> size++;
+  }
+
+  
+  
+/**
+ * Removing from the frony of the list.
+ * @return first
+ */      
 
 struct node* removeFront(struct list *list)
 {
-	return NULL;
+     
+  if(list==NULL || list-> size==0) return NULL;
+  
+    struct node *first = list-> head;
+   
+  //if we have one node in the list
+  if(list -> head && list ->tail){
+    list-> head=NULL;
+    list -> tail=NULL;
+    list->size--;
+    return first;
+
+  }
+  if(list->head !=NULL){
+  
+    list-> head= list->head->next;
+  }
+  
+  list->head->prev=NULL;
+  first-> next=NULL;
+  list-> size--;
+  
+  
+	return first;
 }
 
+
+/**
+ * Removing from the rear of the list.
+ * @return rear
+ * 
+ */
 struct node* removeRear(struct list *list)
 {
-	return NULL;
+ if(list == NULL || list -> size == 0) return NULL;
+  
+    struct node *rear = list -> tail;
+   //if it has one node
+    if(list -> head == list -> tail){
+      list -> head = NULL;
+      list -> tail = NULL;
+      
+      list -> size --;
+      return rear;
+    }
+ 
+ // if there is a node at the rear
+    if(rear != NULL){
+      list -> tail =  list -> tail -> prev;
+    } 
+    list -> tail -> next = NULL;
+    rear -> prev = NULL;
+    list -> size --;
+
+    return rear;
 }
 
+/**
+ * removing a node from a lise
+ * @return node
+ * 
+ */
 struct node* removeNode(struct list *list, struct node *node)
 {
-	return NULL;
+   if(list == NULL || node==NULL) return 0;
+   
+   
+  if(node -> prev != NULL){
+    node -> prev -> next = node -> next;
+  }
+  
+  if(list -> head == node){
+    list -> head = list -> head -> next;
+  }
+  
+  if(list -> tail == node){
+    list -> tail = list -> tail -> prev;
+  }
+  
+  if(node -> next != NULL){
+    node -> next -> prev = node -> prev;
+  }
+  node -> next = node -> prev = NULL;
+  list -> size --;
+
+	return node;
 }
 
 struct node* search(const struct list *list, const void *obj)
 {
+	if(list==0) return NULL;
+	
+	struct node *temp= list ->head;
+	while(temp != NULL){
+	  if(list -> getObject(temp->obj)==obj){
+	    return temp;
+	  }
+	  temp=temp-> next;
+	}
 	return NULL;
 }
 
