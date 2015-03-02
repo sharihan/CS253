@@ -18,12 +18,27 @@ struct list * createList(int (*equals)(const void *,const void *),
 }
 
 void freeList(struct list *list)
+
+if(list== isEmpty())
+  return;
+
+    Node *temp = list-> head;
+    
+      while(temp != null){
+	Node n= temp -> next;
+	freeNode(temp, list -> freeObject);
+	temp=n;
+
 {
+  //setting head and tail to null
+       list ->head=null;
+       list -> tail= null;
+       free(list);
 }
 
 int getSize(const struct list *list)
 {
-	return 0;
+	return list -> size;
 }
 
 int isEmpty(const struct list *list)
