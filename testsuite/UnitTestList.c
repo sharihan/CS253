@@ -7,18 +7,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "common.h"
 #include "Object.h"
 #include "Node.h"
 #include "List.h"
 
-/* 
+/*
  * macro to mimic the functionality of assert() from <assert.h>. The difference is that this version doesn't exit the program entirely.
  * It will just break out of the current function (or test case in this context).
  */
-#define myassert(expr) if(!(expr)){ fprintf(stderr, "\t[assertion failed] %s: %s\n", __PRETTY_FUNCTION__, __STRING(expr)); return FALSE; }
+#define myassert(expr) if(!(expr)){ fprintf(stderr, "\t[assertion failed] %s: %s\n", __PRETTY_FUNCTION__, __STRING(expr)); return 0; }
 
-ListPtr testlist;
+struct list *testlist;
 
 int testCount = 0;
 int passCount = 0;
@@ -28,64 +27,62 @@ void printTestInfo(char* testName, char *info)
 	fprintf(stdout, "%s - %s\n", testName, info);
 }
 
-void printTestResult(char* testName, Boolean passed)
+void printTestResult(char* testName, int passed)
 {
-	if(passed == TRUE)
+	if(passed){
 		fprintf(stdout, "%s - %s\n\n", "[PASSED]", testName);
-	else
+	}else{
 		fprintf(stdout, "%s - %s\n\n", "[FAILED]", testName);
+	}
 }
 
-NodePtr createTestNode(int jobid)
+struct node *createTestNode(int jobid)
 {
-	ObjectPtr job = createObject(jobid, "cmd args");
-	NodePtr node = createNode(job);
+	struct object * job = createObject(jobid, "cmd args");
+	struct node *node = createNode(job);
 	return node;
 }
 
-Boolean addAtFrontWithNoNodes()
+int addAtFrontWithNoNodes()
 {
-	NodePtr node = createTestNode(1);
-
+	struct node *node = createTestNode(1);
 	addAtFront(testlist, node);
-
 	myassert(testlist->size == 1)
 	myassert(testlist->head == node)
 	myassert(testlist->tail == node)
 	myassert(testlist->head->next == NULL)
 	myassert(testlist->head->prev == NULL)
-
-	return TRUE;
+	return 1;
 }
 
-Boolean addAtFrontWithOneNode()
+int addAtFrontWithOneNode()
 {
 	printTestInfo("addAtFrontWithOneNode", "(not implemented)");
-	return FALSE;
+	return 0;
 }
 
-Boolean addAtRearWithNoNodes()
+int addAtRearWithNoNodes()
 {
 	printTestInfo("addAtRearWithNoNodes", "(not implemented)");
-	return FALSE;
+	return 0;
 }
 
-Boolean addAtRearWithOneNode()
+int addAtRearWithOneNode()
 {
 	printTestInfo("addAtRearWithOneNode", "(not implemented)");
-	return FALSE;
+	return 0;
 }
 
-Boolean removeFromListWithOneNode()
+int removeFromListWithOneNode()
 {
 	printTestInfo("removeFromListWithOneNode", "(not implemented)");
-	return FALSE;
+	return 0;
 }
 
-Boolean nullNodeTest()
+int nullNodeTest()
 {
 	printTestInfo("nullNodeTest", "(not implemented)");
-	return FALSE;
+	return 0;
 }
 
 void beforeTest(char* testName)
@@ -94,19 +91,19 @@ void beforeTest(char* testName)
 	testlist = createList(equals, toString, freeObject);
 	testCount++;
 }
-void afterTest(char* testName, Boolean result)
+void afterTest(char* testName, int result)
 {
 	printTestResult(testName, result);
 	freeList(testlist);
 	passCount += result;
 }
 /*
- * etc...
+ * TODO: Write your test functions here
  */
 
 void runUnitTests()
 {
-	Boolean result;
+	int result;
 	char *testName;
 
 	testName = "addAtFrontWithNoNodes";
@@ -139,7 +136,7 @@ void runUnitTests()
 	result = nullNodeTest();
 	afterTest(testName, result);
 
-	//etc...
+	//TODO: Add in your tests here
 
 	fprintf(stdout, "Test Cases: %d\n",  testCount);
 	fprintf(stdout, "Passed: %d\n", passCount);
