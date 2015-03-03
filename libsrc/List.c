@@ -63,8 +63,10 @@ void addAtFront(struct list *list, struct node *node)
 	if (list == NULL) return;
 	if (node == NULL) return;
 	list->size++;
+	
 	node->next = list->head;
 	node->prev = NULL;
+	
 	if (list->head == NULL) {
 		list->head = node;
 		list->tail = node;
@@ -85,26 +87,26 @@ void addAtRear(struct list *list, struct node *node)
     
      if (list == NULL) return;
      if (node == NULL) return;
+     list->size ++;
     
-     if (list->size==1) {
-       list->size ++;
-     }
+     node->prev=list->tail;
+     list->next=NULL;
+
      
-      if(list -> tail != NULL){
-       list -> tail -> next = node;
-   }
-   
-    if(list -> tail == NULL){
+     if(list -> tail == NULL){
           list -> tail = node;
           list -> head = node;
-	  list -> size ++;
-          return; 
+     }else{
+       list->tail->next=node;
+       list->tail=node;
+       
+
+     }
+   
+    
   }
    
-  node -> prev = list -> tail;
-  list -> tail = node;
-  list -> size++;
-  }
+  
 
   
   
