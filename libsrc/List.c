@@ -107,8 +107,6 @@ void addAtRear(struct list *list, struct node *node)
   }
    
   
-
-  
   
 /**
  * Removing from the frony of the list.
@@ -117,31 +115,24 @@ void addAtRear(struct list *list, struct node *node)
 
 struct node* removeFront(struct list *list)
 {
-     
-  if(list==NULL || list-> size==0) return NULL;
-  
-  if(list->size==1) list->size --;
+  if(list==NULL) return ;
+ 
+  list->size --;
   
     struct node *first = list-> head;
-   
-  //if we have one node in the list
-  if(list -> head && list ->tail){
+     list->head->prev=NULL;
+     first->next=NULL;
+  
+  if(list-> head=NULL){
     list-> head=NULL;
     list -> tail=NULL;
     list->size--;
     return first;
 
+  }else{
+  list-> head= list->head->next;
   }
-  if(list->head !=NULL){
-  
-    list-> head= list->head->next;
-  }
-  
-  list->head->prev=NULL;
-  first-> next=NULL;
-  list-> size--;
-  
-  
+ 
 	return first;
 }
 
