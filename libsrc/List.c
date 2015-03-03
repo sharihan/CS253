@@ -23,11 +23,18 @@ struct list * createList(int (*equals)(const void *,const void *),
  */
 void freeList(struct list *list)
 {
-/*
   if(list== isEmpty())  return;
-    struct node *temp = list-> head;
-    
+  struct node *temp = list-> head;
       while(temp != Null){
+	freeNode(temp, list->freeObject);
+      }
+      list->head=NULL;
+      List->tail =NULL;
+      free(list);
+  
+  
+  /*
+
 	struct node *n= temp -> next;
 	freeNode(temp, list -> freeObject);
 	temp=n;
