@@ -31,19 +31,7 @@ void freeList(struct list *list)
       list->head=NULL;
       List->tail =NULL;
       free(list);
-  
-  
-  /*
-
-	struct node *n= temp -> next;
-	freeNode(temp, list -> freeObject);
-	temp=n;
-{
-  //setting head and tail to null
-       list ->head=NULL;
-       list -> tail= NULL;
-       free(list);
-  */     
+    
 }
 
 
