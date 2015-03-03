@@ -16,3 +16,4 @@ void freeNode (struct node *node , void (*freeObject)(void *))
 	(*freeObject)(node->obj);
 	free(node);
 }
+

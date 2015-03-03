@@ -1,4 +1,3 @@
-
 INSTALL=..
 LIB=$(INSTALL)/lib
 INCLUDE=$(INSTALL)/include
@@ -9,7 +8,7 @@ LFLAGS=-L$(LIB) -lmylib
 
 LIBOBJS=List.o Node.o
 
-all: libs 
+all: libs
 
 
 libs: libmylib.so  libmylib.a
@@ -23,19 +22,17 @@ libmylib.a: $(LIBOBJS)
 
 
 install: libs
-	install --mode=644  List.h $(INCLUDE)/
-	install --mode=644  Node.h $(INCLUDE)/
-	install --mode=644  common.h $(INCLUDE)/
-	install --mode=755  libmylib.so $(LIB)/libmylib.so
-	install --mode=755  libmylib.a $(LIB)/libmylib.a
+	cp  List.h $(INCLUDE)/
+	cp  Node.h $(INCLUDE)/
+	cp  libmylib.so $(LIB)/libmylib.so
+	cp  libmylib.a $(LIB)/libmylib.a
 
 installclean:  clean
-	rm --force $(LIB)/libmylib.so
-	rm --force $(LIB)/libmylib.a
-	rm --force $(INCLUDE)/List.h
-	rm --force $(INCLUDE)/Node.h
-	rm --force $(INCLUDE)/common.h
-	
+	rm -f $(LIB)/libmylib.so
+	rm -f $(LIB)/libmylib.a
+	rm -f $(INCLUDE)/List.h
+	rm -f $(INCLUDE)/Node.h
+
 clean:
-	rm --force list *.o a.out core libmylib.a libmylib.so
+	rm -f list *.o a.out core libmylib.a libmylib.so
 

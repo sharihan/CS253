@@ -25,14 +25,12 @@ void freeList(struct list *list)
 {
 /*
   if(list== isEmpty())  return;
-
     struct node *temp = list-> head;
     
       while(temp != Null){
 	struct node *n= temp -> next;
 	freeNode(temp, list -> freeObject);
 	temp=n;
-
 {
   //setting head and tail to null
        list ->head=NULL;
