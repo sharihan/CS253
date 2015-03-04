@@ -154,6 +154,7 @@ struct node* removeFront(struct list *list)
  */
 struct node* removeRear(struct list *list)
 {
+    //if the list is empty or null
  if(list == NULL || list-> isEmpty()) return NULL;
    list -> size --;
  
@@ -164,11 +165,12 @@ struct node* removeRear(struct list *list)
       list -> head = NULL;
       list -> tail = NULL;
       return rear;
-      
+    // if we have more than one node in the list
     }else{
     list -> tail =  list -> tail -> prev; 
     list -> tail -> next = NULL;
     rear -> prev = NULL;
+    list-> tail->next=NULL;
 
 }
     return rear;
