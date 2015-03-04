@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "List.h"
 
+/**
+ * @auther Sali
+ */
+
 struct list * createList(int (*equals)(const void *,const void *),
 			 char * (*toString)(const void *),
 			 void (*freeObject)(void *))
@@ -87,7 +91,7 @@ void addAtFront(struct list *list, struct node *node)
  */
 void addAtRear(struct list *list, struct node *node)
 {
-    
+     //if the list is empty or null
      if (list == NULL) return;
      if (node == NULL) return;
      list->size ++;
@@ -95,10 +99,11 @@ void addAtRear(struct list *list, struct node *node)
      node->prev=list->tail;
      list->next=NULL;
 
-     
+      //if we have one node
      if(list -> tail == NULL){
           list -> tail = node;
           list -> head = node;
+      // if we have more than one node
      }else{
        list->tail->next=node;
        list->tail=node;
@@ -118,22 +123,21 @@ void addAtRear(struct list *list, struct node *node)
 
 struct node* removeFront(struct list *list)
 {
-  if(list==NULL) return NULL ;
-  if(list-> isEmpty()) return NULL ;
- 
+  //if the list is empty or null
+  if(list==NULL ||list-> isEmpty() ) return NULL ;
   list->size --;
   
     struct node *first = list-> head;
-    
-
-  
+   
+  // if we have one node in the list
   if(list->size==1){
     list-> head=NULL;
     list -> tail=NULL;
     return first;
-
+    
+ // if we have more than one node
   }else{
-  list-> head= list->head->next;
+     list-> head= list->head->next;
      list->head->prev=NULL;
      first->next=NULL;
      list->head->prev=NULL;
@@ -150,23 +154,23 @@ struct node* removeFront(struct list *list)
  */
 struct node* removeRear(struct list *list)
 {
- if(list == NULL ) return NULL;
+ if(list == NULL || list-> isEmpty()) return NULL;
    list -> size --;
  
     struct node *rear = list -> tail;
+    
    //if it has one node
-    if(list -> head == list -> tail){
+    if(list->size==1){
       list -> head = NULL;
       list -> tail = NULL;
-     
       return rear;
+      
     }else{
-      list -> tail =  list -> tail -> prev;
-    } 
+    list -> tail =  list -> tail -> prev; 
     list -> tail -> next = NULL;
     rear -> prev = NULL;
-    list -> size --;
 
+}
     return rear;
 }
 
@@ -183,20 +187,18 @@ struct node* removeNode(struct list *list, struct node *node)
   if(node -> prev != NULL){
     node -> prev -> next = node -> next;
   }
-  
-  if(list -> head == node){
-    list -> head = list -> head -> next;
-  }
-  
-  if(list -> tail == node){
-    list -> tail = list -> tail -> prev;
-  }
-  
   if(node -> next != NULL){
     node -> next -> prev = node -> prev;
   }
-  node -> next = node -> prev = NULL;
-  list -> size --;
+  if(list -> head == node){
+    list -> head = list -> head -> next;
+  }
+  if(list -> tail == node){
+    list -> tail = list -> tail -> prev;
+  }
+
+     node -> next = node -> prev = NULL;
+     list -> size --;
 
 	return node;
 }
