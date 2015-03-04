@@ -56,9 +56,8 @@ int getSize(const struct list *list)
  */
 int isEmpty(const struct list *list)
 {
-        if(list->size==0) return TRUE;
 	
-	return FALSE; 
+	return list->size==0; 
     
 }
 
@@ -234,17 +233,17 @@ void reverseList(struct list *list)
   if( list->size==1) return list;
   
   //if we have more than one node
-  struct node *temp = list -> head;
-  struct node *temp2= list -> head;
+  struct node *curr = list -> head;
+  struct node *temp;
   struct node *newTail;
 
-  if(temp != NULL){
-    temp2 = temp -> next;
-    temp -> next = temp -> prev;
-    temp -> prev = temp2;
-    temp = temp2;  
-  }
-
+  while(curr != NULL){
+    temp = curr -> next;
+    curr -> next = curr -> prev;
+    curr -> prev = temp;
+    curr = temp;  
+  
+}
   newTail = list -> tail;
   list -> tail = list -> head;
   list -> head = newTail;
