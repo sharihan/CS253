@@ -30,6 +30,7 @@ void freeList(struct list *list)
       }
       list->head=NULL;
       List->tail =NULL;
+      
       free(list);
     
 }
@@ -50,7 +51,9 @@ int getSize(const struct list *list)
  */
 int isEmpty(const struct list *list)
 {
-	return list -> size==0;
+  // if we have an empty list the size is 0
+  if(list==NULL) return 0;
+	return list -> size; 
 }
 
 
@@ -115,22 +118,25 @@ void addAtRear(struct list *list, struct node *node)
 
 struct node* removeFront(struct list *list)
 {
-  if(list==NULL) return ;
+  if(list==NULL) return NULL ;
+  if(list-> isEmpty()) return NULL ;
  
   list->size --;
   
     struct node *first = list-> head;
-     list->head->prev=NULL;
-     first->next=NULL;
+    
+
   
-  if(list-> head=NULL){
+  if(list->size==1){
     list-> head=NULL;
     list -> tail=NULL;
-    list->size--;
     return first;
 
   }else{
   list-> head= list->head->next;
+     list->head->prev=NULL;
+     first->next=NULL;
+     list->head->prev=NULL;
   }
  
 	return first;
@@ -144,20 +150,17 @@ struct node* removeFront(struct list *list)
  */
 struct node* removeRear(struct list *list)
 {
- if(list == NULL || list -> size == 0) return NULL;
-  
+ if(list == NULL ) return NULL;
+   list -> size --;
+ 
     struct node *rear = list -> tail;
    //if it has one node
     if(list -> head == list -> tail){
       list -> head = NULL;
       list -> tail = NULL;
-      
-      list -> size --;
+     
       return rear;
-    }
- 
- // if there is a node at the rear
-    if(rear != NULL){
+    }else{
       list -> tail =  list -> tail -> prev;
     } 
     list -> tail -> next = NULL;
@@ -174,7 +177,7 @@ struct node* removeRear(struct list *list)
  */
 struct node* removeNode(struct list *list, struct node *node)
 {
-   if(list == NULL || node==NULL) return 0;
+   if(list == NULL || node==NULL || list->size==0) return NULL;
    
    
   if(node -> prev != NULL){
@@ -204,7 +207,7 @@ struct node* search(const struct list *list, const void *obj)
 	
 	struct node *temp= list ->head;
 	while(temp != NULL){
-	  if(list -> getObject(temp->obj)==obj){
+	  if(list -> equals(temp->obj,obj)){
 	    return temp;
 	  }
 	  temp=temp-> next;
@@ -212,8 +215,11 @@ struct node* search(const struct list *list, const void *obj)
 	return NULL;
 }
 
+
 void reverseList(struct list *list)
 {
+  
+  //////////////////////////////////
 }
 
 void printList(const struct list *list)
