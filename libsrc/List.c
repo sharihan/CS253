@@ -230,7 +230,7 @@ void reverseList(struct list *list)
   if(list == NULL || list->size==0) return;
   
   //if the list hase one node
-  if( list->size==1) return list;
+  if( list->size==1) return;
   
   //if we have more than one node
   struct node *curr = list -> head;
