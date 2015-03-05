@@ -116,7 +116,6 @@ Boolean emptyList(){
     freeNode(removeNode(testlist,node2), testlist -> freeObject);
     
     myassert(isEmpty(testlist) == TRUE)
-    
     return TRUE;    
     
 }
@@ -180,16 +179,17 @@ void runUnitTests()
 	//////////////////////////////////
 	//TODO: Add in your tests here  //
 	//////////////////////////////////
-	testName = "addAtFrontWithNOneNode";
-	beforeTest(testName);
-	result = addAtFrontWithOneNode();
-	afterTest(testName, result);
-	
 	testName = "emptyList";
 	beforeTest(testName);
 	result = emptyList();
 	afterTest(testName, result);
 
+	testName = "addAtFrontWithNOneNode";
+	beforeTest(testName);
+	result = addAtFrontWithOneNode();
+	afterTest(testName, result);
+	
+	
 	
 	
 	fprintf(stdout, "Test Cases: %d\n",  testCount);
