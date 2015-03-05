@@ -3,6 +3,7 @@
 #include "List.h"
 
 /**
+ * This program implements a doubly linked list using C language.
  * @auther Sali
  */
 
@@ -188,21 +189,26 @@ struct node* removeNode(struct list *list, struct node *node)
    
    
   if(node -> prev != NULL){
+  
     node -> prev -> next = node -> next;
   }
   if(node -> next != NULL){
+  
     node -> next -> prev = node -> prev;
   }
   
   
   if(list -> head == node){
+  
     list -> head = list -> head -> next;
   }
   if(list -> tail == node){
+  
     list -> tail = list -> tail -> prev;
   }
 
      node -> next = node -> prev = NULL;
+     
      list -> size --;
 
 	return node;
