@@ -97,9 +97,50 @@ void afterTest(char* testName, int result)
 	freeList(testlist);
 	passCount += result;
 }
-/*
- * TODO: Write your test functions here
+/*////////////////////////////////////////////////
+ * TODO: Write your test functions here        //
+ *///////////////////////////////////////////////
+
+/**
+ * checking empty list
  */
+Boolean emptyList(){
+
+    struct node = createTestNode(1);
+    addAtRear(testlist,node);
+    
+    struct node2 = createTestNode(1);
+    addAtRear(testlist,node2);
+   
+    freeNode(removeNode(testlist,node), testlist -> freeObject);
+    freeNode(removeNode(testlist,node2), testlist -> freeObject);
+    
+    myassert(isEmpty(testlist) == TRUE)
+    
+    return TRUE;    
+    
+}
+
+/**
+ * Add to front in list with one node
+ */
+int addAtFrontWithOneNode()
+{
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+
+	struct node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+
+	myassert(testlist->size == 2)
+	myassert(testlist->head == node2)
+	myassert(testlist->tail == node)
+	myassert(testlist->head->prev == NULL)
+	myassert(testlist->tail->next == NULL)
+
+	return 2;
+}
+
 
 void runUnitTests()
 {
@@ -136,8 +177,21 @@ void runUnitTests()
 	result = nullNodeTest();
 	afterTest(testName, result);
 
-	//TODO: Add in your tests here
+	//////////////////////////////////
+	//TODO: Add in your tests here  //
+	//////////////////////////////////
+	testName = "addAtFrontWithNOneNode";
+	beforeTest(testName);
+	result = addAtFrontWithOneNode();
+	afterTest(testName, result);
+	
+	testName = "emptyList";
+	beforeTest(testName);
+	result = emptyList();
+	afterTest(testName, result);
 
+	
+	
 	fprintf(stdout, "Test Cases: %d\n",  testCount);
 	fprintf(stdout, "Passed: %d\n", passCount);
 	fprintf(stdout, "Failed: %d\n", testCount - passCount);
