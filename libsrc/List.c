@@ -185,29 +185,29 @@ struct node* removeRear(struct list *list)
  */
 struct node* removeNode(struct list *list, struct node *node)
 {
-   if(list == NULL || node==NULL || list->size==0) return NULL;
+   if(list == NULL || node == NULL || list->size == 0) return NULL;
    
    
   if(node -> prev != NULL){
   
-    node -> prev -> next = node -> next;
+    node -> prev -> next= node -> next;
   }
   if(node -> next != NULL){
   
-    node -> next -> prev = node -> prev;
+    node -> next -> prev= node -> prev;
   }
   
   
-  if(list -> head == node){
+  if(list -> head== node){
   
-    list -> head = list -> head -> next;
+    list -> head= list -> head -> next;
   }
-  if(list -> tail == node){
+  if(list -> tail== node){
   
-    list -> tail = list -> tail -> prev;
+    list -> tail= list -> tail -> prev;
   }
 
-     node -> next = node -> prev = NULL;
+     node -> next= node -> prev = NULL;
      
      list -> size --;
 
@@ -239,15 +239,15 @@ void reverseList(struct list *list)
   if( list->size==1) return;
   
   //if we have more than one node
-  struct node *curr = list -> head;
+  struct node *currHead = list -> head;
   struct node *temp;
   struct node *newTail;
 
-  while(curr != NULL){
-    temp = curr -> next;
-    curr -> next = curr -> prev;
-    curr -> prev = temp;
-    curr = temp;  
+  while(currHead != NULL){
+    temp = currHead -> next;
+    currHead -> next = currHead -> prev;
+    currHead -> prev = temp;
+    currHead = temp;  
   
 }
   newTail = list -> tail;
