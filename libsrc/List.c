@@ -32,14 +32,19 @@ void freeList(struct list *list)
     if (list->size == 0 || list == NULL)
 	return;
 
-    struct node *temp = list->head;
+    struct node *temp = list-> head;
 
-    while (temp != NULL) {
-	freeNode(temp, list->freeObject);
-    }
-    list->head = NULL;
-    list->tail = NULL;
+    while (temp && (temp != list->tail)) {
+            temp= temp-> next;
+	freeNode(temp -> prev, list->freeObject);
+	}
+	temp->prev=NULL;
 
+    
+   if(temp == list->tail){   
+     	freeNode(list->tail, list->freeObject);
+
+   }
     free(list);
 
 }
@@ -224,6 +229,9 @@ struct node *removeNode(struct list *list, struct node *node)
     return node;
 }
 
+/**
+ * sreaching for nodes
+ */
 struct node *search(const struct list *list, const void *obj)
 {
     if (list->size == 0 || list == NULL)
@@ -240,7 +248,9 @@ struct node *search(const struct list *list, const void *obj)
     return NULL;
 }
 
-
+/**
+ * reverse the list 
+ */
 void reverseList(struct list *list)
 {
     //if the list empty or null
@@ -268,6 +278,7 @@ void reverseList(struct list *list)
     list->head = newTail;
 
 }
+
 
 void printList(const struct list *list)
 {
