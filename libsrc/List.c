@@ -104,10 +104,12 @@ void addAtFront(struct list *list, struct node *node)
 void addAtRear(struct list *list, struct node *node)
 {
     //if the list is empty or null
-    if (list == NULL || list->size == 0)
-	return;
+    if (list == NULL)
+      return;
+		
     if (node == NULL)
 	return;
+    
     list->size++;
 
     node->prev = list->tail;
@@ -140,7 +142,7 @@ struct node *removeFront(struct list *list)
     //if the list is empty or null
     if (list == NULL || list->size == 0)
 	return NULL;
-    list->size--;
+   
 
     struct node *first = list->head;
 
@@ -148,6 +150,7 @@ struct node *removeFront(struct list *list)
     if (list->size == 1) {
 	list->head = NULL;
 	list->tail = NULL;
+	list->size--;
 	return first;
 
 	// if we have more than one node
@@ -156,8 +159,10 @@ struct node *removeFront(struct list *list)
 	list->head->prev = NULL;
 	first->next = NULL;
 	list->head->prev = NULL;
+	
     }
-
+     list->size--;
+     
     return first;
 }
 
@@ -172,7 +177,7 @@ struct node *removeRear(struct list *list)
     //if the list is empty or null
     if (list == NULL || list->size == 0)
 	return NULL;
-    list->size--;
+  
 
     struct node *rear = list->tail;
 
@@ -180,6 +185,7 @@ struct node *removeRear(struct list *list)
     if (list->size == 1) {
 	list->head = NULL;
 	list->tail = NULL;
+	list->size--;
 	return rear;
 	// if we have more than one node in the list
     } else {
@@ -187,8 +193,8 @@ struct node *removeRear(struct list *list)
 	list->tail->next = NULL;
 	rear->prev = NULL;
 	list->tail->next = NULL;
-
-    }
+    }  
+    list->size--;
     return rear;
 }
 
