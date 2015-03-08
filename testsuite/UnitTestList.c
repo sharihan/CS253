@@ -89,6 +89,10 @@ int getSizeOfListWithNoNodes()
 	return 1;    
 }
 
+
+/**
+ * check the size of list with 4 nodes
+ */ 
 int getSizeOfListWithFourNodes()
 {
 
