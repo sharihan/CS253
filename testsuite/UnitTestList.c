@@ -106,7 +106,7 @@ int addAtFrontWithOneNode()
 	myassert(testlist->head->prev == NULL)
 	myassert(testlist->tail->next == NULL)
 
-	return 2;
+	return 1;
 }
 
 /**
@@ -140,7 +140,7 @@ int addAtRearWithOneNode()
 	myassert(testlist->tail == node2)
 	myassert(testlist->head->prev == NULL)
 	myassert(testlist->tail->next == NULL)
- 	return 2;
+ 	return 1;
  }
 
 int removeFromListWithOneNode()
@@ -153,7 +153,7 @@ int removeFromListWithOneNode()
 	myassert(testlist->size == 0)
 	myassert(testlist->head == NULL)
 	myassert(testlist->tail == NULL)	
-	return 0;
+	return 1;
 }
 
 
@@ -171,7 +171,7 @@ int nullNodeTest()
 	myassert(testlist -> size == 0)
         myassert(testlist -> head == NULL)
         myassert(testlist -> tail == NULL)
-	return 0;
+	return 1;
 }
 
 
@@ -222,6 +222,8 @@ void runUnitTests()
 	beforeTest(testName);
 	result = addAtRearWithNoNodes();
 	afterTest(testName, result);
+	
+	
 
 	
 /////////////////////end of tests//////////////////////
