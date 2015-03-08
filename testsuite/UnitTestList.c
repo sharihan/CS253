@@ -81,9 +81,10 @@ int getSizeOfListWithNoNodes()
 
 	struct node *node = NULL;
 	addAtFront(testlist,node);
-	struct node *node2 = NULL;
 	
+	struct node *node2 = NULL;
 	addAtFront(testlist,node2);
+	
 	myassert(getSize(testlist) == 0)
 	
 	return 1;    
@@ -142,8 +143,10 @@ int addAtFrontWithOneNode()
 {
 	struct node *node = createTestNode(1);
 	addAtFront(testlist,node);
+	
 	struct node *node2 = createTestNode(1);
 	addAtFront(testlist,node2);
+	
 	myassert(testlist->size == 2)
 	myassert(testlist->head == node2)
 	myassert(testlist->tail == node)
@@ -178,6 +181,7 @@ int addAtRearWithOneNode()
 {
         struct node *node = createTestNode(1);
 	addAtRear(testlist,node);
+	
 	struct node *node2 = createTestNode(1);
 	addAtRear(testlist,node2);
 	
