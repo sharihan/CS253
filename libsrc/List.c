@@ -114,7 +114,7 @@ void addAtRear(struct list *list, struct node *node)
     node->next = NULL;
 
     //if we have one node
-    if (list->size == NULL) {
+    if (list->tail== NULL) {
 	list->tail = node;
 	list->head = node;
 	// if we have more than one node
