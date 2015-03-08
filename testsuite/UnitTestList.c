@@ -68,28 +68,68 @@ void afterTest(char* testName, int result)
 	freeList(testlist);
 	passCount += result;
 }
-/*////////////////////////////////////////////////
+
+/*///////////////////////////////////////////////
  * TODO: Write your test functions here        //
  *///////////////////////////////////////////////
 
 /**
+ *checking the size of the list
+ */ 
+int getSizeOfListWithNoNodes()
+{
+
+	struct node *node = NULL;
+	addAtFront(testlist,node);
+	struct node *node2 = NULL;
+	
+	addAtFront(testlist,node2);
+	myassert(getSize(testlist) == 0)
+	
+	return 1;    
+}
+
+int getSizeOfListWithFourNodes()
+{
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+	
+	struct node *node3 = createTestNode(1);
+	addAtFront(testlist,node3);
+	
+	struct node *node4 = createTestNode(1);
+	addAtFront(testlist,node4);
+      
+
+	myassert(getSize(testlist) == 4)
+	
+	return 1; 
+}
+
+/**
  * checking empty list
  */
-// int emptyList(){
-// 
-//     struct node *node = createTestNode(1);
-//     addAtRear(testlist,node);
-//     
-//     struct node *node2 = createTestNode(1);
-//     addAtRear(testlist,node2);
-//    
-//     freeNode(removeNode(testlist,node), testlist -> freeObject);
-//     freeNode(removeNode(testlist,node2), testlist -> freeObject);
-//     
-//     myassert(testlist) == 0)
-//     return 0;    
-//     
-// }
+int emptyListTest()
+{
+
+	struct node *node = createTestNode(1);
+	addAtRear(testlist,node);
+	
+	struct node *node2 = createTestNode(1);
+	addAtRear(testlist,node2);
+      
+	freeNode(removeNode(testlist,node), testlist -> freeObject);
+	freeNode(removeNode(testlist,node2), testlist -> freeObject);
+	
+	myassert(testlist->size == 0)
+	
+	return 1;    
+    
+}
 
 /**
  * Add to front in list with one node
@@ -127,7 +167,9 @@ int addAtRearWithNoNodes()
 	return 1;
 }
 
-
+/**
+ * add to rear one node
+ */
 int addAtRearWithOneNode()
 {
         struct node *node = createTestNode(1);
@@ -143,7 +185,11 @@ int addAtRearWithOneNode()
  	return 1;
  }
 
-int removeFromListWithOneNode()
+ 
+/**
+ * remove from a list one node
+ */
+int removeFrontFromListWithOneNode()
 {
         struct node *node = createTestNode(1);
 	addAtFront(testlist, node);
@@ -156,24 +202,185 @@ int removeFromListWithOneNode()
 	return 1;
 }
 
+ 
+/**
+ * remove from rear a list 23 node
+ */
+int removeRearFromListWithTwoNode()
+{
+        struct node *node = createTestNode(1);
+	addAtFront(testlist, node);
+	
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist, node2);
+	
+	
+	freeNode(removeRear(testlist), testlist -> freeObject);
+  
+        myassert(testlist -> size == 1)
+        myassert(testlist -> head == node2)
+        myassert(testlist -> tail == node2)
+        myassert(testlist -> head -> next == NULL)
+        myassert(testlist -> tail -> prev == NULL)
+	
+	return 1;
+}
 
 
+
+/**
+ * remove a node one node list
+ */
+int removeNodeFromListWithOneNode()
+{
+  
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	
+	freeNode(removeNode(testlist,node), testlist -> freeObject);
+	
+	myassert(testlist -> size == 0)
+	myassert(testlist -> head == NULL)
+	myassert(testlist -> tail == NULL)
+
+	
+	return 1;
+}
+
+/**
+ * remove a node two nodes list
+ */
+int removeNodeFromListWithTwoNodes()
+{
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+	
+	freeNode(removeNode(testlist,node2), testlist -> freeObject);
+	
+	myassert(testlist -> size == 1)
+	myassert(testlist -> head == node)
+	myassert(testlist -> tail == node)
+	myassert(testlist -> head -> prev == NULL)
+	myassert(testlist -> tail -> next == NULL)
+	
+	return 1;
+}
+
+/**
+ * null node test
+ */
 int nullNodeTest()
 {
-        struct node *node = NULL;
+	struct node *node = NULL;
 	addAtFront(testlist,node);
 	struct node *node2 = NULL;
 	addAtFront(testlist,node2);
-	
+	      
 	freeNode(removeNode(testlist,node), testlist -> freeObject);
 	freeNode(removeNode(testlist,node2), testlist -> freeObject);
 
 	myassert(testlist -> size == 0)
-        myassert(testlist -> head == NULL)
-        myassert(testlist -> tail == NULL)
+	myassert(testlist -> head == NULL)
+	myassert(testlist -> tail == NULL)
+	return 1;
+  
+}
+
+
+/**
+ *  not empty list test
+ */
+int notEmptyListTest()
+{
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+
+	freeNode(removeNode(testlist,node), testlist -> freeObject);
+	  
+	myassert(testlist -> size == 1)
+	myassert(testlist -> head == node2)
+	myassert(testlist -> tail == node2) 
+
 	return 1;
 }
 
+/**
+ * search the list
+ */
+int searchListTest()
+{
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	  
+	struct node *node2 = createTestNode(2);
+	addAtFront(testlist,node2);
+	  
+	struct node *node3 = createTestNode(3);
+	addAtFront(testlist,node3);
+	  
+	myassert(search(testlist , node -> obj))
+	myassert(search(testlist , node2-> obj))
+	myassert(search(testlist , node3 -> obj))
+	  
+	return 1;
+ }
+ 
+/**
+ * reverse list with two nodes
+ */
+int reverseListWithTwoNodes()
+{
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+	
+	reverseList(testlist);
+	
+	myassert(testlist -> size == 2)
+	myassert(testlist -> head == node)
+	myassert(testlist -> tail == node2)
+
+	myassert(testlist -> head -> prev == NULL)
+	myassert(testlist -> tail -> next == NULL)
+	
+	return 1;
+}
+
+/**
+ * reverse list with three nodes
+ */
+
+int reverseListWithThreeNodes(){
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+	struct node *node3 = createTestNode(1);
+	addAtFront(testlist,node3);
+	
+	reverseList(testlist);
+	
+	myassert(testlist -> size == 3)
+	myassert(testlist -> head == node)
+	myassert(testlist -> tail == node3)
+	myassert(testlist -> head -> next == node2)
+	myassert(testlist -> tail -> prev == node2)
+	
+	myassert(testlist -> head -> prev == NULL)
+	myassert(testlist -> tail -> next == NULL)
+	
+	return 1;
+}
 
 
 void runUnitTests()
@@ -192,39 +399,88 @@ void runUnitTests()
 //TODO: Add in your tests here  //
 //////////////////////////////////
 
-	testName = "addAtRearWithOneNode";
+	
+	testName = "getSizeTest";
 	beforeTest(testName);
-	result = addAtRearWithOneNode();
+	result = getSizeOfListWithNoNodes();
 	afterTest(testName, result);
-
-	testName = "removeFromListWithOneNode";
+	
+	testName = "getSizeTestFourNodes";
 	beforeTest(testName);
-	result = removeFromListWithOneNode();
+	result = getSizeOfListWithFourNodes();
 	afterTest(testName, result);
-
+	
 	testName = "nullNodeTest";
 	beforeTest(testName);
 	result = nullNodeTest();
 	afterTest(testName, result);
-
 	
-// 	testName = "emptyList";
-// 	beforeTest(testName);
-// 	result = emptyList();
-// 	afterTest(testName, result);
-
+        testName = "emptyListTest";
+	beforeTest(testName);
+	result = emptyListTest();
+	afterTest(testName, result);
+	
+	
+	testName = "notEmptyListTest";
+	beforeTest(testName);
+	result=  notEmptyListTest();
+	afterTest(testName, result);
+	
+	
 	testName = "addAtFrontWithOneNode";
 	beforeTest(testName);
 	result = addAtFrontWithOneNode();
 	afterTest(testName, result);
+	
+	testName = "addAtRearWithOneNode";
+	beforeTest(testName);
+	result = addAtRearWithOneNode();
+	afterTest(testName, result);
+	
 	
 	testName = "addAtRearWithNoNodes";
 	beforeTest(testName);
 	result = addAtRearWithNoNodes();
 	afterTest(testName, result);
 	
-	
 
+	testName = "removeFrontFromListWithOneNode";
+	beforeTest(testName);
+	result = removeFrontFromListWithOneNode();
+	afterTest(testName, result);
+
+	
+	testName = "removeRearFromListWithTwoNode";
+	beforeTest(testName);
+	result = removeRearFromListWithTwoNode();
+	afterTest(testName, result);
+	
+	testName = "removeNodeFromListWithTwoNodes()";
+	beforeTest(testName);
+	result = removeNodeFromListWithTwoNodes();
+	afterTest(testName, result);
+	
+	testName = "removeNodeFromListWithOneNode()";
+	beforeTest(testName);
+	result = removeNodeFromListWithOneNode();
+	afterTest(testName, result);
+	
+	
+	testName ="searchListTest";
+	beforeTest(testName);
+	result=searchListTest();
+	afterTest(testName, result);
+
+	testName = "reverseListWithTwoNodes";
+	beforeTest(testName);
+	result=  reverseListWithTwoNodes();
+	afterTest(testName, result);
+	
+	testName = "reverseListWithThreeNodes";
+	beforeTest(testName);
+	result=  reverseListWithThreeNodes();
+	afterTest(testName, result);
+	
 	
 /////////////////////end of tests//////////////////////
 	
