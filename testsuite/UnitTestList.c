@@ -55,35 +55,6 @@ int addAtFrontWithNoNodes()
 	return 1;
 }
 
-int addAtFrontWithOneNode()
-{
-	printTestInfo("addAtFrontWithOneNode", "(not implemented)");
-	return 0;
-}
-
-int addAtRearWithNoNodes()
-{
-	printTestInfo("addAtRearWithNoNodes", "(not implemented)");
-	return 0;
-}
-
-int addAtRearWithOneNode()
-{
-	printTestInfo("addAtRearWithOneNode", "(not implemented)");
-	return 0;
-}
-
-int removeFromListWithOneNode()
-{
-	printTestInfo("removeFromListWithOneNode", "(not implemented)");
-	return 0;
-}
-
-int nullNodeTest()
-{
-	printTestInfo("nullNodeTest", "(not implemented)");
-	return 0;
-}
 
 void beforeTest(char* testName)
 {
@@ -104,7 +75,7 @@ void afterTest(char* testName, int result)
 /**
  * checking empty list
  */
-// Boolean emptyList(){
+// int emptyList(){
 // 
 //     struct node *node = createTestNode(1);
 //     addAtRear(testlist,node);
@@ -115,30 +86,94 @@ void afterTest(char* testName, int result)
 //     freeNode(removeNode(testlist,node), testlist -> freeObject);
 //     freeNode(removeNode(testlist,node2), testlist -> freeObject);
 //     
-//     myassert(isEmpty(testlist) == TRUE)
-//     return TRUE;    
+//     myassert(testlist) == 0)
+//     return 0;    
 //     
 // }
 
 /**
  * Add to front in list with one node
  */
-// int addAtFrontWithOneNode()
-// {
-// 	struct node *node *node = createTestNode(1);
-// 	addAtFront(testlist,node);
-// 
-// 	struct node *node2 = createTestNode(1);
-// 	addAtFront(testlist,node2);
-// 
-// 	myassert(testlist->size == 2)
-// 	myassert(testlist->head == node2)
-// 	myassert(testlist->tail == node)
-// 	myassert(testlist->head->prev == NULL)
-// 	myassert(testlist->tail->next == NULL)
-// 
-// 	return 2;
-// }
+int addAtFrontWithOneNode()
+{
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	struct node *node2 = createTestNode(1);
+	addAtFront(testlist,node2);
+	myassert(testlist->size == 2)
+	myassert(testlist->head == node2)
+	myassert(testlist->tail == node)
+	myassert(testlist->head->prev == NULL)
+	myassert(testlist->tail->next == NULL)
+
+	return 2;
+}
+
+/**
+ * Add to rear with no nodes
+ */
+int addAtRearWithNoNodes()
+{
+
+	struct node *node = createTestNode(1);
+	addAtRear(testlist, node);
+	
+	myassert(testlist->size == 1)
+	myassert(testlist->head == node)
+	myassert(testlist->tail == node)
+	myassert(testlist->head->next == NULL)
+	myassert(testlist->head->prev == NULL)
+	
+	return 1;
+}
+
+
+int addAtRearWithOneNode()
+{
+        struct node *node = createTestNode(1);
+	addAtRear(testlist,node);
+	struct node *node2 = createTestNode(1);
+	addAtRear(testlist,node2);
+	
+	myassert(testlist->size == 2)
+	myassert(testlist->head == node)
+	myassert(testlist->tail == node2)
+	myassert(testlist->head->prev == NULL)
+	myassert(testlist->tail->next == NULL)
+ 	return 2;
+ }
+
+int removeFromListWithOneNode()
+{
+        struct node *node = createTestNode(1);
+	addAtFront(testlist, node);
+	
+	freeNode(removeFront(testlist),(testlist -> freeObject));
+	
+	myassert(testlist->size == 0)
+	myassert(testlist->head == NULL)
+	myassert(testlist->tail == NULL)	
+	return 0;
+}
+
+
+
+int nullNodeTest()
+{
+        struct node *node = NULL;
+	addAtFront(testlist,node);
+	struct node *node2 = NULL;
+	addAtFront(testlist,node2);
+	
+	freeNode(removeNode(testlist,node), testlist -> freeObject);
+	freeNode(removeNode(testlist,node2), testlist -> freeObject);
+
+	myassert(testlist -> size == 0)
+        myassert(testlist -> head == NULL)
+        myassert(testlist -> tail == NULL)
+	return 0;
+}
+
 
 
 void runUnitTests()
@@ -151,15 +186,11 @@ void runUnitTests()
 	result = addAtFrontWithNoNodes();
 	afterTest(testName, result);
 
-	testName = "addAtFrontWithOneNode";
-	beforeTest(testName);
-	result = addAtFrontWithOneNode();
-	afterTest(testName, result);
+   
 
-	testName = "addAtRearWithNoNodes";
-	beforeTest(testName);
-	result = addAtRearWithNoNodes();
-	afterTest(testName, result);
+//////////////////////////////////
+//TODO: Add in your tests here  //
+//////////////////////////////////
 
 	testName = "addAtRearWithOneNode";
 	beforeTest(testName);
@@ -176,21 +207,24 @@ void runUnitTests()
 	result = nullNodeTest();
 	afterTest(testName, result);
 
-	//////////////////////////////////
-	//TODO: Add in your tests here  //
-	//////////////////////////////////
+	
 // 	testName = "emptyList";
 // 	beforeTest(testName);
 // 	result = emptyList();
 // 	afterTest(testName, result);
-// 
-// 	testName = "addAtFrontWithNOneNode";
-// 	beforeTest(testName);
-// 	result = addAtFrontWithOneNode();
-// 	afterTest(testName, result);
-// 	
+
+	testName = "addAtFrontWithOneNode";
+	beforeTest(testName);
+	result = addAtFrontWithOneNode();
+	afterTest(testName, result);
 	
+	testName = "addAtRearWithNoNodes";
+	beforeTest(testName);
+	result = addAtRearWithNoNodes();
+	afterTest(testName, result);
+
 	
+/////////////////////end of tests//////////////////////
 	
 	fprintf(stdout, "Test Cases: %d\n",  testCount);
 	fprintf(stdout, "Passed: %d\n", passCount);
