@@ -259,6 +259,7 @@ int removeNodeFromListWithTwoNodes()
 
 	struct node *node = createTestNode(1);
 	addAtFront(testlist,node);
+	
 	struct node *node2 = createTestNode(1);
 	addAtFront(testlist,node2);
 	
@@ -280,6 +281,7 @@ int nullNodeTest()
 {
 	struct node *node = NULL;
 	addAtFront(testlist,node);
+	
 	struct node *node2 = NULL;
 	addAtFront(testlist,node2);
 	      
@@ -302,6 +304,7 @@ int notEmptyListTest()
 
 	struct node *node = createTestNode(1);
 	addAtFront(testlist,node);
+	
 	struct node *node2 = createTestNode(1);
 	addAtFront(testlist,node2);
 
@@ -336,6 +339,26 @@ int searchListTest()
 	return 1;
  }
  
+ 
+/**
+ * search the list
+ */
+int searchListTwoNodeTest()
+{
+
+	struct node *node = createTestNode(1);
+	addAtFront(testlist,node);
+	  
+	struct node *node2 = createTestNode(2);
+	addAtFront(testlist,node2);
+	  
+	myassert(search(testlist , node -> obj))
+	myassert(search(testlist , node2-> obj))
+
+	  
+	return 1;
+ }
+ 
 /**
  * reverse list with two nodes
  */
@@ -344,6 +367,7 @@ int reverseListWithTwoNodes()
 
 	struct node *node = createTestNode(1);
 	addAtFront(testlist,node);
+	
 	struct node *node2 = createTestNode(1);
 	addAtFront(testlist,node2);
 	
@@ -367,8 +391,10 @@ int reverseListWithThreeNodes(){
 
 	struct node *node = createTestNode(1);
 	addAtFront(testlist,node);
+	
 	struct node *node2 = createTestNode(1);
 	addAtFront(testlist,node2);
+	
 	struct node *node3 = createTestNode(1);
 	addAtFront(testlist,node3);
 	
@@ -474,6 +500,13 @@ void runUnitTests()
 	beforeTest(testName);
 	result=searchListTest();
 	afterTest(testName, result);
+	
+	
+	testName ="searchListTwoNodeTest()";
+	beforeTest(testName);
+	result=searchListTwoNodeTest();
+	afterTest(testName, result);
+	
 
 	testName = "reverseListWithTwoNodes";
 	beforeTest(testName);
