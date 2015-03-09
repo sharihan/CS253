@@ -13,7 +13,7 @@ struct list *createList(int (*equals) (const void *, const void *),
 {
     struct list *list;
 
-    list = (struct list *) malloc(sizeof(struct list));
+    list = (struct list *) malloc(sizeof( struct list));
     list->size = 0;
     list->head = NULL;
     list->tail = NULL;
